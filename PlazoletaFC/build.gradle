@@ -1,0 +1,37 @@
+group 'EverBall'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'application'
+mainClassName = 'Everball.plazoletafc.App'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+run{
+    standardInput = System.in
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "Everball.plazoletafc.App"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    compile ('io.socket:socket.io-client:1.0.0')
+    compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    compile group: 'org.slf4j', name: 'slf4j-simple', version: '1.7.25'
+    compile 'com.google.code.gson:gson:2.8.5'
+}
+
+
